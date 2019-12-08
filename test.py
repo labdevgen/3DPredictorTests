@@ -120,11 +120,9 @@ def run_timing(func,data,N):
 
 def df2intervals(df):
     result=df.copy()
-    newindex = pd.IntervalIndex.from_tuples(
-                df.apply(lambda x: (x.start,
-                                    x.end), axis="columns"),
-                                          closed="both")
-    result = result.set_index(newindex)
+    result = result.set_index(df.apply(
+                    lambda x: pd.Interval(x.start,x.end,closed="both"),
+                    axis="columns"))
     return result
 
 
