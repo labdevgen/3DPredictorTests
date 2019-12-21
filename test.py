@@ -3,10 +3,12 @@ import os
 import datetime
 from memory_profiler import memory_usage
 
-source_path = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
+source_path = os.path.join(os.path.dirname(os.path.abspath(os.path.abspath(__file__))),
                            "3Dpredictor/source")
 print (source_path)
 sys.path.append(source_path)
+sys.path.append(source_path+"/../nn/source/")
+
 from shared import intersect_with_interval, \
     intersect_with_interval_v2, intersect_with_interval_v3, \
     intersect_with_interval_v4, Interval
@@ -124,7 +126,6 @@ def df2intervals(df):
                     lambda x: pd.Interval(x.start,x.end,closed="both"),
                     axis="columns"))
     return result
-
 
 tree, df, df2 = create_intervals()
 df3 = df2intervals(df)
