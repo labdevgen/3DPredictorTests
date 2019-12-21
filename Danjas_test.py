@@ -68,7 +68,7 @@ def simple_test():
     for start,end in zip(random_points_starts,random_points_ends):
         interval = Interval("chr1",start,end)
         contact = hic.get_contact(interval)
-        if contact == None or not np.isfinite(contact):
+        if contact == None:
             continue
         else:
             chipSignal = np.nansum(bwReader1.get_interval(interval))
